@@ -5,6 +5,7 @@ import json
 import telegram
 
 from dotenv import load_dotenv
+from datetime import datetime
 
 
 def load_config():
@@ -28,7 +29,7 @@ def main(config):
 
     while True:
         try:
-            print("Send new request")
+            print(f"Sent a new request at {datetime.now()}")
             response = requests.get(
                 reviews_url, headers=reviews_headers, timeout=config["timeout"], params=reviews_params
             )
