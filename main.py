@@ -12,8 +12,8 @@ def load_config():
     config_path = os.path.join(os.path.dirname(__file__), 'config', 'config.json')
     if os.path.exists(dotenv_path):
         load_dotenv(dotenv_path)
-    if not os.environ.get('DEVMAN_TOKEN'):
-        print('You should set your API token. Please check README.md')
+    if not os.environ.get('DEVMAN_TOKEN') or not os.environ.get('BOT_TOKEN') or not os.environ.get('CHAT_ID'):
+        print('You should set your `config/.env` file. Please check README.md')
         raise EnvironmentError
     return json.load(open(config_path, "r"))
 
@@ -21,6 +21,7 @@ def load_config():
 def main(config):
     devman_token = os.environ['DEVMAN_TOKEN']
     bot_token = os.environ["BOT_TOKEN"]
+    chat_id = os.environ["CHAT_ID"]
     bot = telegram.Bot(token=bot_token)
     reviews_url = config["urls"]["user_reviews"]
     reviews_headers = {'Authorization': f'Token {devman_token}'}
@@ -55,7 +56,7 @@ def main(config):
                     text=config.get("message").format(title=attempt.get("lesson_title"),
                                                       url=attempt.get("lesson_url"),
                                                       review=review_message),
-                    chat_id=41878799)
+                    chat_id=chat_id)
         if ts := resp_json.get("last_attempt_timestamp"):  # Поиск таймстампа в ответе с инфой по последним изменениям.
             reviews_params["timestamp"] = ts
         else:
