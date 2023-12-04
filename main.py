@@ -20,7 +20,9 @@ def main(config):
     token = os.environ['DEVMAN_TOKEN']
     get_reviews = config["urls"]["user_reviews"]
     headers = {'Authorization': f'Token {token}'}
-    print(requests.get(get_reviews, headers=headers).json())
+    while True:
+        response = requests.get(get_reviews, headers=headers, timeout=config["timeout"])
+        print(response.json())
 
 
 if __name__ == '__main__':
