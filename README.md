@@ -10,3 +10,4 @@
 updates = bot.get_updates()
 firts_name = updates[-1].message.from_user.first_name
 ```
+- Используй файл `config/config.json` для настройки версии апи, задержек и текста отправляемых сообщений.
