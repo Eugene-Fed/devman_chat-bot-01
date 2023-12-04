@@ -3,5 +3,6 @@
   {
     "user_reviews": "https://dvmn.org/api/long_polling/"
   },
-  "timeout": 60
+  "timeout": 120,
+  "sleep": 30
 }

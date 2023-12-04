@@ -1,3 +1,5 @@
+import time
+
 import requests
 import os
 import json
@@ -20,8 +22,22 @@ def main(config):
     token = os.environ['DEVMAN_TOKEN']
     get_reviews = config["urls"]["user_reviews"]
     headers = {'Authorization': f'Token {token}'}
+    params = dict()
     while True:
-        response = requests.get(get_reviews, headers=headers, timeout=config["timeout"])
+        try:
+            print("Send new request")
+            response = requests.get(get_reviews, headers=headers, timeout=config["timeout"], params=params)
+        except requests.exceptions.ReadTimeout:
+            print("Bot generated timeout and created new request.")
+            continue
+        except requests.exceptions.ConnectionError:
+            print("Connection Error. Waiting connection.")
+            time.sleep(config["sleep"])
+            continue
+
+        if ts := response.json().get("timestamp_to_request"):
+            params["timestamp"] = ts
+            print(f"Server returned Timeout timestamp {ts}")
         print(response.json())
 
 
