@@ -9,6 +9,9 @@ __pycache__/
 # pyenv / virtualenv
 .python-version
 
+# IDE
+.idea
+
 # Distribution / packaging
 .Python
 build/
