@@ -14,3 +14,19 @@ updates = bot.get_updates()
 firts_name = updates[-1].message.from_user.first_name
 ```
 - Используй файл `config/config.json` для настройки версии апи, задержек и текста отправляемых сообщений.
+
+## Config example
+```
+{
+  "urls":
+  {
+    "user_reviews": "https://dvmn.org/api/long_polling/",
+  },
+  "timeout": 120,
+  "sleep": 30,
+  "message": "Mentor has checked your work!\nTheme: {title}\nLink: {url}\n\n{review}",
+  "review_messages": ["Unfortunately there are errors in the work :(",
+    "Everything is fine! You can proceed to the next lesson :)"],
+  "error_messages": {"500":  "Server returned code 500. New request will be send in {} seconds."}
+}
+```

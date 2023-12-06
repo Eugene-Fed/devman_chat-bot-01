@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 def load_config():
     """
     В корне проекта достаточно много "обязательного мусора" при наличии докера и разного CI/CD. Поэтому удобнее
-    `.env` хранить в какой-нибудь папке. По крайней мере на моем последнем проекте он хранился именно в config/ -
+    `.env` хранить в какой-нибудь папке. По крайней мере на моем последнем проекте он хранился именно в `config/` -
     это было единообразно по всем микросервисам и было вполне удобно.
     """
     dotenv_path = os.path.join(os.path.dirname(__file__), 'config', '.env')
@@ -28,9 +28,8 @@ def load_config():
 
 
 def main():
-    log_path = os.path.join('logs', 'app.log')
     logging.basicConfig(
-        filename=log_path,
+        filename='app.log',  # Чтобы не раздувать структуру папок оставим в учебных целях логфайл в корне.
         filemode='a',
         format='%(asctime)s: %(message)s',
         datefmt='%d/%m/%Y %H:%M:%S',

@@ -1,8 +1,7 @@
 {
   "urls":
   {
-    "user_reviews": "https://dvmn.org/api/long_polling/",
-    "test_request": "https://httpstat.us/200"
+    "user_reviews": "https://dvmn.org/api/long_polling/"
   },
   "timeout": 120,
   "sleep": 30,
