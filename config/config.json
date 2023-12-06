@@ -7,6 +7,5 @@
   "sleep": 30,
   "message": "Mentor has checked your work!\nTheme: {title}\nLink: {url}\n\n{review}",
   "review_messages": ["Unfortunately there are errors in the work :(",
-    "Everything is fine! You can proceed to the next lesson :)"],
-  "error_messages": {"500":  "Server returned code 500. New request will be send in {} seconds."}
+    "Everything is fine! You can proceed to the next lesson :)"]
 }
