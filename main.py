@@ -6,6 +6,7 @@ import telegram
 import logging
 
 from dotenv import load_dotenv
+from systemd.journal import JournalHandler
 
 
 def load_config():
@@ -30,6 +31,9 @@ def main():
         datefmt='%d/%m/%Y %H:%M:%S',
         level=logging.INFO
     )
+    systemd_log = logging.getLogger('systemd_log')
+    systemd_log.addHandler(JournalHandler())
+    systemd_log.setLevel(logging.INFO)
 
     config = load_config()
     devman_token = os.environ['DEVMAN_TOKEN']
@@ -40,6 +44,8 @@ def main():
     reviews_headers = {'Authorization': f'Token {devman_token}'}
     reviews_params = dict()
 
+    systemd_log.info("Bot started")  # В журнал
+    logging.info("Bot started")  # В папку проекта
     while True:
         try:
             response = requests.get(
@@ -76,7 +82,7 @@ def main():
                                                       url=attempt.get("lesson_url"),
                                                       review=review_message),
                     chat_id=tg_chat_id)
-                logging.info("Message sent.")
+                logging.info("Message sent")
         if ts := review_info.get("last_attempt_timestamp"):  # Поиск таймстампа в ответе с инфой.
             reviews_params["timestamp"] = ts
 
