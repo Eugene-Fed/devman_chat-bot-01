@@ -46,6 +46,8 @@ def main():
 
     systemd_log.info("Bot started")  # В журнал
     logging.info("Bot started")  # В папку проекта
+    tg_bot.send_message(text="Bot started", chat_id=tg_chat_id)  # В ТГ
+    
     while True:
         try:
             response = requests.get(
