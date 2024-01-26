@@ -10,7 +10,7 @@ __pycache__/
 .python-version
 bin/
 lib64
-pyenv.cfg
+pyvenv.cfg
 
 # IDE
 .idea
